@@ -36,26 +36,34 @@ int main() {
     cin >> n;
 
     int arr[n];
+    int arr1[5];
+    int count = 0;
+    while(count < 5){
+        srand(time(0));
+        for (int i = 0; i < n; i++) {
+            arr[i] = rand() % 10001 + 10000;
+        }
 
-    srand(time(0));
-    for (int i = 0; i < n; i++) {
-         arr[i] = rand() % 10001 + 10000;
+        double cpu_time_used;
+    
+        auto start = chrono::high_resolution_clock::now();
+        quickSort(arr, 0, n-1);
+        auto end = chrono::high_resolution_clock::now();
+
+        cpu_time_used = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        /*cout << "Sorted array is: ";
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+        }*/
+        arr1[count] = cpu_time_used;
+        cout << "Time taken: " << cpu_time_used << " microseconds" << endl;
+        count++;
+    }   
+    float avg = 0;
+    for(int j = 0; j < 5;j++){
+        avg += arr1[j];
     }
-
-    double cpu_time_used;
-
-    auto start = chrono::high_resolution_clock::now();
-    quickSort(arr, 0, n-1);
-    auto end = chrono::high_resolution_clock::now();
-
-    cpu_time_used = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
-
-    /*cout << "Sorted array is: ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }*/
-
-    cout << "Time taken: " << cpu_time_used << " nanoseconds" << endl;
-
+    cout << "Average time: " << avg/5 << " microseconds" << endl;
     return 0;
 }
