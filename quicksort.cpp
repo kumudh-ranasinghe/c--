@@ -21,13 +21,10 @@ int partition(int arr[], int left, int right) {
     return i+1;  
 }
 
-// Recursive Quick Sort function
 void quickSort(int arr[], int left, int right) {
     if (left < right) {
-        // partition the array into two sub-arrays around pivot
         int p = partition(arr, left, right);
 
-        // recursively sort the two sub-arrays
         quickSort(arr, left, p-1);
         quickSort(arr, p+1, right);
     }
@@ -40,7 +37,6 @@ int main() {
 
     int arr[n];
 
-    // Generate random array
     srand(time(0));
     for (int i = 0; i < n; i++) {
          arr[i] = rand() % 10001 + 10000;
